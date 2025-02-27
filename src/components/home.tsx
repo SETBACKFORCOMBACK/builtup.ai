@@ -4,7 +4,7 @@ import RecipeGrid from "./RecipeGrid";
 import RecipeDetail from "./RecipeDetail";
 import { Button } from "./ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { Camera, ChefHat, Sparkles } from "lucide-react";
+import { Camera, ChefHat, Sparkles, ArrowRight } from "lucide-react";
 
 interface HomeProps {
   isLoading?: boolean;
@@ -44,68 +44,53 @@ const Home = ({ isLoading = false }: HomeProps) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      <div className="max-w-7xl mx-auto px-6 py-12 md:py-24">
-        {/* Hero Section */}
+      <div className="max-w-5xl mx-auto px-4 py-8">
+        {/* Compact Hero Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center space-y-6 mb-16"
+          transition={{ duration: 0.5 }}
+          className="flex flex-col md:flex-row items-center gap-6 mb-8"
         >
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 tracking-tight">
-            Turn Your Fridge Into
-            <span className="text-primary block mt-2">Delicious Recipes</span>
-          </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Take a photo of your ingredients and let AI suggest amazing recipes
-            you can make right now!
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
-            <Button
-              size="lg"
-              className="text-lg px-8 py-6"
-              onClick={() => setShowUploader(true)}
-            >
-              <Camera className="mr-2 h-5 w-5" />
+          <div className="flex-1 space-y-4 text-center md:text-left">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
+              <span className="text-primary">AI-Powered</span> Recipe Generator
+            </h1>
+            <p className="text-base text-gray-600 max-w-md leading-relaxed">
+              Take a photo of your ingredients and get instant recipe
+              suggestions
+            </p>
+            <Button onClick={() => setShowUploader(true)} className="mt-2">
+              <Camera className="mr-2 h-4 w-4" />
               Get Started
             </Button>
           </div>
-
-          {/* Feature Cards */}
-          <div className="grid md:grid-cols-3 gap-8 mt-16">
-            {[
-              {
-                icon: <Camera className="h-6 w-6" />,
-                title: "Snap a Photo",
-                description: "Take a quick photo of your fridge or ingredients",
-              },
-              {
-                icon: <Sparkles className="h-6 w-6" />,
-                title: "AI Magic",
-                description: "Our AI analyzes your ingredients instantly",
-              },
-              {
-                icon: <ChefHat className="h-6 w-6" />,
-                title: "Get Recipes",
-                description: "Receive personalized recipe suggestions",
-              },
-            ].map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 * index }}
-                className="bg-white p-6 rounded-xl shadow-sm border border-gray-100"
-              >
-                <div className="h-12 w-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-4">
-                  {feature.icon}
-                </div>
-                <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
-              </motion.div>
-            ))}
+          <div className="flex-1 flex justify-center">
+            <img
+              src="https://images.unsplash.com/photo-1505935428862-770b6f24f629?q=80&w=2134&auto=format&fit=crop"
+              alt="Food ingredients"
+              className="rounded-lg shadow-md w-full max-w-xs object-cover h-48 md:h-64"
+            />
           </div>
         </motion.div>
+
+        {/* Feature Pills */}
+        <div className="flex flex-wrap justify-center gap-3 mb-8">
+          {[
+            { icon: <Camera className="h-4 w-4" />, text: "Snap a Photo" },
+            { icon: <Sparkles className="h-4 w-4" />, text: "AI Analysis" },
+            { icon: <ChefHat className="h-4 w-4" />, text: "Get Recipes" },
+            { icon: <ArrowRight className="h-4 w-4" />, text: "Start Cooking" },
+          ].map((feature, index) => (
+            <div
+              key={index}
+              className="flex items-center gap-2 bg-primary/5 text-primary px-3 py-1.5 rounded-full text-sm"
+            >
+              {feature.icon}
+              <span>{feature.text}</span>
+            </div>
+          ))}
+        </div>
 
         {/* Main Content */}
         <AnimatePresence mode="wait">
@@ -115,7 +100,6 @@ const Home = ({ isLoading = false }: HomeProps) => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
-              className="space-y-8"
             >
               <PhotoUploader
                 onPhotoSelect={handlePhotoSelect}

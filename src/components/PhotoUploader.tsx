@@ -82,14 +82,14 @@ const PhotoUploader = ({
           Upload Photo
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[600px]">
+      <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>Upload a Photo of Your Fridge</DialogTitle>
         </DialogHeader>
         <Card className="bg-white">
           <CardContent>
             <div
-              className={`relative h-[400px] w-full rounded-lg border-2 border-dashed p-4 transition-colors ${
+              className={`relative h-[300px] w-full rounded-lg border-2 border-dashed p-4 transition-colors ${
                 isDragging ? "border-primary bg-primary/10" : "border-gray-200"
               }`}
               onDrop={handleDrop}

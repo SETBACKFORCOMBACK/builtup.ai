@@ -26,11 +26,11 @@ const RecipeCard = ({
 
   return (
     <Card
-      className="w-[350px] h-[450px] bg-white cursor-pointer hover:shadow-lg transition-shadow duration-200"
+      className="w-full max-w-[280px] h-[320px] bg-white cursor-pointer hover:shadow-lg transition-shadow duration-200"
       onClick={onClick}
     >
       <CardHeader className="p-0">
-        <div className="relative w-full h-48">
+        <div className="relative w-full h-36">
           <img
             src={image}
             alt={title}
@@ -38,21 +38,20 @@ const RecipeCard = ({
           />
         </div>
       </CardHeader>
-      <CardContent className="p-6">
-        <h3 className="text-xl font-semibold mb-4 line-clamp-2">{title}</h3>
-        <div className="flex items-center gap-4 mb-4">
-          <div className="flex items-center gap-2">
-            <Clock className="w-4 h-4 text-gray-500" />
-            <span className="text-sm text-gray-600">{cookingTime}</span>
+      <CardContent className="p-4">
+        <h3 className="text-lg font-semibold mb-2 line-clamp-2">{title}</h3>
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center gap-1">
+            <Clock className="w-3 h-3 text-gray-500" />
+            <span className="text-xs text-gray-600">{cookingTime}</span>
           </div>
-          <div className="flex items-center gap-2">
-            <ChefHat className="w-4 h-4 text-gray-500" />
-            <Badge className={difficultyColor}>{difficulty}</Badge>
-          </div>
+          <Badge className={`${difficultyColor} text-xs px-2 py-0.5`}>
+            {difficulty}
+          </Badge>
         </div>
       </CardContent>
-      <CardFooter className="px-6 pb-6">
-        <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+      <CardFooter className="px-4 pb-4">
+        <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
           <div
             className="h-full bg-primary"
             style={{ width: "70%" }}
