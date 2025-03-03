@@ -84,7 +84,7 @@ const PhotoUploader = ({
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
-          <DialogTitle>Upload a Photo of Your Fridge</DialogTitle>
+          <DialogTitle>Choose from Gallery</DialogTitle>
         </DialogHeader>
         <Card className="bg-white">
           <CardContent>
@@ -139,7 +139,7 @@ const PhotoUploader = ({
                       }
                     >
                       <Upload className="mr-2 h-4 w-4" />
-                      Choose File
+                      Choose from Gallery
                     </Button>
                   </div>
                   <input
