@@ -1,68 +1,29 @@
-import React from "react";
-import RecipeCard from "./RecipeCard";
+import { Accordion, AccordionItem } from "@/components/ui/accordion";
 
-interface Recipe {
-  id: string;
-  title: string;
-  image: string;
-  difficulty: "Easy" | "Medium" | "Hard";
-  cookingTime: string;
-}
-
-interface RecipeGridProps {
-  recipes?: Recipe[];
-  onRecipeClick?: (recipeId: string) => void;
-}
-
-const RecipeGrid = ({
-  recipes = [
-    {
-      id: "1",
-      title: "Spaghetti Carbonara",
-      image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c",
-      difficulty: "Medium",
-      cookingTime: "30 mins",
-    },
-    {
-      id: "2",
-      title: "Grilled Chicken Salad",
-      image: "https://images.unsplash.com/photo-1546069901-d5bfd2cbfb1f",
-      difficulty: "Easy",
-      cookingTime: "20 mins",
-    },
-    {
-      id: "3",
-      title: "Beef Wellington",
-      image: "https://images.unsplash.com/photo-1546069901-5ec6a79120b0",
-      difficulty: "Hard",
-      cookingTime: "2 hrs",
-    },
-    {
-      id: "4",
-      title: "Vegetable Stir Fry",
-      image: "https://images.unsplash.com/photo-1546069901-5ec6a79120b1",
-      difficulty: "Easy",
-      cookingTime: "25 mins",
-    },
-  ],
-  onRecipeClick = () => {},
-}: RecipeGridProps) => {
+export default function RecipeGrid({ recipes }: { recipes: any[] }) {
   return (
-    <div className="w-full min-h-[400px] bg-gray-50 p-4 rounded-lg">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center">
-        {recipes.map((recipe) => (
-          <RecipeCard
-            key={recipe.id}
-            title={recipe.title}
-            image={recipe.image}
-            difficulty={recipe.difficulty}
-            cookingTime={recipe.cookingTime}
-            onClick={() => onRecipeClick(recipe.id)}
-          />
-        ))}
-      </div>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {recipes.map((recipe, index) => (
+        <div
+          key={index}
+          className="border rounded-lg p-4 shadow-md bg-white hover:scale-105 transition"
+        >
+          <h2 className="text-xl font-bold text-[#ff3b00]">{recipe.title}</h2>
+          <p className="text-sm text-gray-500 mb-2">{recipe.description}</p>
+          <div className="flex justify-between items-center">
+            <span className="text-green-600 text-sm">{recipe.difficulty}</span>
+            <span className="text-sm text-black">{recipe.cookingTime}</span>
+          </div>
+
+          <Accordion type="single" collapsible className="mt-4">
+            {recipe.steps.map((step: string, i: number) => (
+              <AccordionItem key={i} title={`Step ${i + 1}`}>
+                {step}
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      ))}
     </div>
   );
-};
-
-export default RecipeGrid;
+}

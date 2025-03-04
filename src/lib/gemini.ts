@@ -1,78 +1,42 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// Initialize the Gemini API with your API key
+// Initialize Gemini API
 const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || "");
-
-export async function analyzeImageForRecipes(imageBase64: string) {
-  try {
-    // Remove the data URL prefix to get just the base64 data
-    const base64Data = imageBase64.split(",")[1];
-
-    // Initialize the model
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
-    // Create image part
-    const imagePart = {
-      inlineData: {
-        data: base64Data,
-        mimeType: "image/jpeg",
-      },
-    };
-
-    // Generate content with explicit JSON format request
-    const result = await model.generateContent([
-      `Analyze this image and suggest 4 possible recipes that can be made with the visible ingredients.\nProvide the response in the following JSON format:\n[\n  {\n    \"title\": \"Recipe Name\",\n    \"difficulty\": \"Easy/Medium/Hard\",\n    \"cookingTime\": \"XX mins\",\n    \"description\": \"Brief description\"\n  }\n]\nEnsure the response is valid JSON.`,
-      imagePart,
-    ]);
-
-    const response = await result.response;
-    let text = response.text();
-    console.log("Raw Gemini Response:", text);
-
-    // Clean up the response to ensure valid JSON
-    text = text.replace(/```json\n?|```/g, "").trim();
-
-    try {
-      const recipes = JSON.parse(text);
-      if (!Array.isArray(recipes)) {
-        throw new Error("Response is not an array");
-      }
-      return recipes;
-    } catch (parseError) {
-      console.error("Error parsing Gemini response:", parseError);
-      return [
-        {
-          title: "Quick Meal",
-          difficulty: "Easy",
-          cookingTime: "20 mins",
-          description: "A simple recipe using available ingredients",
-        },
-      ];
-    }
-  } catch (error) {
-    console.error("Error analyzing image:", error);
-    throw error;
-  }
-}
 
 export async function generateRecipesFromIngredients(ingredients: string[]) {
   try {
-    // Initialize the model (using text-only model)
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    // Format the ingredients list
     const ingredientsList = ingredients.join(", ");
 
-    // Generate content with explicit JSON format request
+    // ✅ New Prompt with Cooking Steps
     const result = await model.generateContent(
-      `I have these ingredients in my refrigerator: ${ingredientsList}.\n      \nSuggest 4 possible recipes that can be made with these ingredients. You can assume I have basic pantry staples like salt, pepper, oil, etc.\n\nProvide the response in the following JSON format:\n[\n  {\n    \"title\": \"Recipe Name\",\n    \"difficulty\": \"Easy/Medium/Hard\",\n    \"cookingTime\": \"XX mins\",\n    \"description\": \"Brief description\"\n  }\n]\nEnsure the response is valid JSON.`,
+      `I have these ingredients: ${ingredientsList}.
+      Suggest 4 recipes with step-by-step instructions.
+      Assume I have basic pantry items like salt, oil, and pepper.
+
+      Respond in this JSON format:
+      [
+        {
+          "title": "Recipe Name",
+          "difficulty": "Easy/Medium/Hard",
+          "cookingTime": "XX mins",
+          "description": "Short Description",
+          "steps": [
+            "Step 1: ...",
+            "Step 2: ...",
+            "Step 3: ..."
+          ]
+        }
+      ]
+      Ensure the response is valid JSON with at least 4 steps for each recipe.`,
     );
 
     const response = await result.response;
     let text = response.text();
     console.log("Raw Gemini Response:", text);
 
-    // Clean up the response to ensure valid JSON
+    // 🧠 Clean the Response
     text = text.replace(/```json\n?|```/g, "").trim();
 
     try {
@@ -80,20 +44,19 @@ export async function generateRecipesFromIngredients(ingredients: string[]) {
       if (!Array.isArray(recipes)) {
         throw new Error("Response is not an array");
       }
-      return recipes;
+      return recipes.map((recipe) => ({
+        title: recipe.title,
+        difficulty: recipe.difficulty,
+        cookingTime: recipe.cookingTime,
+        description: recipe.description,
+        steps: recipe.steps || [],
+      }));
     } catch (parseError) {
-      console.error("Error parsing Gemini response:", parseError);
-      return [
-        {
-          title: "Quick Meal",
-          difficulty: "Easy",
-          cookingTime: "20 mins",
-          description: "A simple recipe using available ingredients",
-        },
-      ];
+      console.error("JSON Parse Error:", parseError);
+      return [];
     }
   } catch (error) {
-    console.error("Error generating recipes from ingredients:", error);
+    console.error("Error generating recipes:", error);
     throw error;
   }
 }
