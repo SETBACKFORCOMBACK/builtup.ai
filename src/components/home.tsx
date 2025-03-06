@@ -40,6 +40,11 @@ const Home = ({ isLoading = false }: HomeProps) => {
     setSelectedRecipeId(recipeId);
   };
 
+  // Find the selected recipe
+  const selectedRecipe = recipes.find(
+    (recipe) => recipe.id === selectedRecipeId,
+  );
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-5xl mx-auto px-4 py-8">
@@ -135,6 +140,7 @@ const Home = ({ isLoading = false }: HomeProps) => {
         {/* Recipe Detail Dialog */}
         {selectedRecipeId && (
           <RecipeDetail
+            recipe={selectedRecipe}
             isOpen={!!selectedRecipeId}
             onClose={() => setSelectedRecipeId(null)}
           />

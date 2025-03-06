@@ -23,6 +23,7 @@ export default function RecipeDetail({ recipe }: { recipe?: any }) {
 
       <Accordion type="single" collapsible className="mt-6">
         {recipe.steps &&
+          Array.isArray(recipe.steps) &&
           recipe.steps.map((step: string, index: number) => (
             <AccordionItem key={index} title={`Step ${index + 1}`}>
               {step}
