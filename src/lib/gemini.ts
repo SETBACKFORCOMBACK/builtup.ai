@@ -32,7 +32,8 @@ Provide the response in the following JSON format:
     "steps": ["Step 1", "Step 2", "Step 3"]
   }
 ]
-Ensure the response is valid JSON.`,
+Ensure the response is valid JSON.
+Always include the step-by-step cooking instructions in the "steps" field.`,
       imagePart,
     ]);
 
@@ -81,6 +82,13 @@ export async function generateRecipesFromIngredients(ingredients: string[]) {
 
 Suggest 4 possible recipes that can be made with these ingredients. You can assume I have basic pantry staples like salt, pepper, oil, etc.
 
+For each recipe, provide:
+- Title
+- Difficulty level (Easy/Medium/Hard)
+- Cooking time (in minutes)
+- Short description
+- Step-by-step cooking instructions in an array format
+
 Provide the response in the following JSON format:
 [
   {
@@ -91,7 +99,7 @@ Provide the response in the following JSON format:
     "steps": ["Step 1", "Step 2", "Step 3"]
   }
 ]
-Ensure the response is valid JSON.`,
+Make sure the steps field always contains the cooking instructions. Return valid JSON only.`,
     );
 
     const response = await result.response;
