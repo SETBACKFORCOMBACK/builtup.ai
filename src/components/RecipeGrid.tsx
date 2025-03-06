@@ -1,6 +1,14 @@
 import { Accordion, AccordionItem } from "@/components/ui/accordion";
 
-export default function RecipeGrid({ recipes }: { recipes: any[] }) {
+export default function RecipeGrid({ recipes = [] }: { recipes?: any[] }) {
+  if (!recipes || recipes.length === 0) {
+    return (
+      <div className="text-center p-8 text-gray-500">
+        No recipes available yet
+      </div>
+    );
+  }
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {recipes.map((recipe, index) => (
@@ -16,11 +24,12 @@ export default function RecipeGrid({ recipes }: { recipes: any[] }) {
           </div>
 
           <Accordion type="single" collapsible className="mt-4">
-            {recipe.steps.map((step: string, i: number) => (
-              <AccordionItem key={i} title={`Step ${i + 1}`}>
-                {step}
-              </AccordionItem>
-            ))}
+            {recipe.steps &&
+              recipe.steps.map((step: string, i: number) => (
+                <AccordionItem key={i} title={`Step ${i + 1}`}>
+                  {step}
+                </AccordionItem>
+              ))}
           </Accordion>
         </div>
       ))}

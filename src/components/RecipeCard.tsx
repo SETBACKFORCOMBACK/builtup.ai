@@ -8,7 +8,15 @@ interface Recipe {
   steps: string[];
 }
 
-export function RecipeCard({ recipe }: { recipe: Recipe }) {
+export function RecipeCard({ recipe }: { recipe?: Recipe }) {
+  if (!recipe) {
+    return (
+      <div className="border rounded-lg p-4 shadow-md bg-white">
+        No recipe data available
+      </div>
+    );
+  }
+
   return (
     <div className="border rounded-lg p-4 shadow-md bg-white">
       <h2 className="text-lg font-bold">{recipe.title}</h2>
@@ -17,11 +25,12 @@ export function RecipeCard({ recipe }: { recipe: Recipe }) {
       <p>Cooking Time: {recipe.cookingTime}</p>
 
       <Accordion type="single">
-        {recipe.steps.map((step, index) => (
-          <AccordionItem key={index} title={`Step ${index + 1}`}>
-            {step}
-          </AccordionItem>
-        ))}
+        {recipe.steps &&
+          recipe.steps.map((step, index) => (
+            <AccordionItem key={index} title={`Step ${index + 1}`}>
+              {step}
+            </AccordionItem>
+          ))}
       </Accordion>
     </div>
   );
