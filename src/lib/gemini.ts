@@ -29,11 +29,11 @@ Provide the response in the following JSON format:
     "difficulty": "Easy/Medium/Hard",
     "cookingTime": "XX mins",
     "description": "Brief description",
-    "steps": ["Step 1", "Step 2", "Step 3"]
+    "steps": ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5"]
   }
 ]
 Ensure the response is valid JSON.
-Always include the step-by-step cooking instructions in the "steps" field.`,
+IMPORTANT: You MUST include at least 5 detailed step-by-step cooking instructions in the "steps" field for EACH recipe. This is critical for user experience.`,
       imagePart,
     ]);
 
@@ -46,6 +46,7 @@ Always include the step-by-step cooking instructions in the "steps" field.`,
 
     try {
       const recipes = JSON.parse(text);
+      console.log("Parsed Recipes:", recipes); // Debugging step
       if (!Array.isArray(recipes)) {
         throw new Error("Response is not an array");
       }
@@ -78,28 +79,26 @@ export async function generateRecipesFromIngredients(ingredients: string[]) {
 
     // Generate content with explicit JSON format request
     const result = await model.generateContent(
-      `I have these ingredients in my refrigerator: ${ingredientsList}.
+      `I have these ingredients: ${ingredientsList}.
 
-Suggest 4 possible recipes that can be made with these ingredients. You can assume I have basic pantry staples like salt, pepper, oil, etc.
-
-For each recipe, provide:
+Suggest 4 recipes with:
 - Title
 - Difficulty level (Easy/Medium/Hard)
-- Cooking time (in minutes)
+- Cooking time
 - Short description
-- Step-by-step cooking instructions in an array format
+- **Step-by-step cooking instructions** (MANDATORY) in an array format.
 
-Provide the response in the following JSON format:
+Return **ONLY JSON**, using this format:
 [
   {
     "title": "Recipe Name",
     "difficulty": "Easy/Medium/Hard",
     "cookingTime": "XX mins",
     "description": "Brief description",
-    "steps": ["Step 1", "Step 2", "Step 3"]
+    "steps": ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5"]
   }
 ]
-Make sure the steps field always contains the cooking instructions. Return valid JSON only.`,
+IMPORTANT: You MUST include at least 5 detailed step-by-step cooking instructions in the "steps" field for EACH recipe. This is critical for user experience. Never return a recipe without detailed steps.`,
     );
 
     const response = await result.response;
@@ -111,6 +110,7 @@ Make sure the steps field always contains the cooking instructions. Return valid
 
     try {
       const recipes = JSON.parse(text);
+      console.log("Parsed Recipes:", recipes); // Debugging step
       if (!Array.isArray(recipes)) {
         throw new Error("Response is not an array");
       }

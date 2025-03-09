@@ -25,6 +25,14 @@ const Home = ({ isLoading = false }: HomeProps) => {
         title: recipe.title,
         difficulty: recipe.difficulty,
         cookingTime: recipe.cookingTime,
+        description: recipe.description,
+        steps: recipe.steps || [
+          "Preheat oven",
+          "Prepare ingredients",
+          "Mix ingredients together",
+          "Cook according to instructions",
+          "Serve and enjoy",
+        ],
         image: `https://source.unsplash.com/featured/?${encodeURIComponent(recipe.title)},food`,
       }));
       setRecipes(formattedRecipes);
@@ -58,20 +66,32 @@ const Home = ({ isLoading = false }: HomeProps) => {
               className="flex flex-col md:flex-row items-center gap-6 mb-8"
             >
               <div className="flex-1 space-y-4 text-center md:text-left">
-                <h1 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
+                <div className="mb-2 text-center">
+                  <h1 className="text-2xl md:text-3xl font-bold text-blue-600 tracking-tight">
+                    builtup.ai
+                  </h1>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
                   <span className="text-primary">AI-Powered</span> Recipe
                   Generator
-                </h1>
+                </h2>
                 <p className="text-base text-gray-600 max-w-md leading-relaxed">
                   Enter ingredients from your fridge and get instant recipe
                   suggestions
                 </p>
                 <Button
                   onClick={() => setShowIngredientInput(true)}
-                  className="mt-2"
+                  className="mt-4 px-6 py-6 text-lg font-semibold transition-all duration-500 transform hover:scale-105 hover:shadow-xl relative overflow-hidden group"
                 >
-                  <Refrigerator className="mr-2 h-4 w-4" />
-                  Get Started
+                  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-md"></span>
+                  <span className="absolute -inset-px bg-gradient-to-r from-pink-500 to-orange-500 rounded-md blur opacity-0 group-hover:opacity-75 transition-opacity duration-500 group-hover:animate-pulse"></span>
+                  <span className="relative flex items-center">
+                    <Refrigerator className="mr-3 h-5 w-5 transition-transform duration-500 group-hover:rotate-12" />
+                    <span className="relative z-10">Get Started</span>
+                    <span className="absolute inset-0 flex items-center justify-center w-full h-full text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      Get Started
+                    </span>
+                  </span>
                 </Button>
               </div>
               <div className="flex-1 flex justify-center">
@@ -139,11 +159,20 @@ const Home = ({ isLoading = false }: HomeProps) => {
 
         {/* Recipe Detail Dialog */}
         {selectedRecipeId && (
-          <RecipeDetail
-            recipe={selectedRecipe}
-            isOpen={!!selectedRecipeId}
-            onClose={() => setSelectedRecipeId(null)}
-          />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <RecipeDetail
+              recipe={selectedRecipe}
+              isOpen={!!selectedRecipeId}
+              onClose={() => {
+                setSelectedRecipeId(null);
+              }}
+            />
+          </motion.div>
         )}
       </div>
     </div>
