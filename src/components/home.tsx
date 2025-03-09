@@ -20,26 +20,30 @@ const Home = ({ isLoading = false }: HomeProps) => {
   const handleRecipesGenerated = (generatedRecipes: any[]) => {
     try {
       setLoading(true);
-      const formattedRecipes = generatedRecipes.map((recipe, index) => ({
-        id: String(index + 1),
-        title: recipe.title,
-        difficulty: recipe.difficulty,
-        cookingTime: recipe.cookingTime,
-        description: recipe.description,
-        steps: recipe.steps || [
-          "Preheat oven",
-          "Prepare ingredients",
-          "Mix ingredients together",
-          "Cook according to instructions",
-          "Serve and enjoy",
-        ],
-        image: `https://source.unsplash.com/featured/?${encodeURIComponent(recipe.title)},food`,
-      }));
-      setRecipes(formattedRecipes);
-      setShowIngredientInput(false);
+
+      // Simulate a slightly longer loading time for better animation experience
+      setTimeout(() => {
+        const formattedRecipes = generatedRecipes.map((recipe, index) => ({
+          id: String(index + 1),
+          title: recipe.title,
+          difficulty: recipe.difficulty,
+          cookingTime: recipe.cookingTime,
+          description: recipe.description,
+          steps: recipe.steps || [
+            "Preheat oven",
+            "Prepare ingredients",
+            "Mix ingredients together",
+            "Cook according to instructions",
+            "Serve and enjoy",
+          ],
+          image: `https://source.unsplash.com/featured/?${encodeURIComponent(recipe.title)},food`,
+        }));
+        setRecipes(formattedRecipes);
+        setShowIngredientInput(false);
+        setLoading(false);
+      }, 1500); // Add a small delay for better animation experience
     } catch (error) {
       console.error("Error processing recipes:", error);
-    } finally {
       setLoading(false);
     }
   };

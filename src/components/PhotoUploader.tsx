@@ -115,10 +115,26 @@ const PhotoUploader = ({
                       disabled={isGenerating}
                     >
                       {isGenerating ? (
-                        <>
-                          <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
-                          Generating...
-                        </>
+                        <div className="flex items-center justify-center w-full">
+                          <div className="relative">
+                            <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-purple-600 via-blue-500 to-green-400 opacity-75 blur animate-pulse"></div>
+                            <div className="relative flex items-center space-x-2 bg-black rounded-md px-3 py-1">
+                              <div className="flex space-x-1">
+                                {[0, 1, 2].map((i) => (
+                                  <div
+                                    key={i}
+                                    className="h-2 w-2 rounded-full bg-blue-400 animate-bounce"
+                                    style={{ animationDelay: `${i * 0.15}s` }}
+                                  ></div>
+                                ))}
+                              </div>
+                              <span className="text-white font-medium">
+                                AI Processing
+                              </span>
+                              <div className="ml-1 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+                            </div>
+                          </div>
+                        </div>
                       ) : (
                         "Generate Recipes"
                       )}
