@@ -9,8 +9,9 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { X, Plus, Refrigerator } from "lucide-react";
+import { X, Plus, Refrigerator, Home } from "lucide-react";
 import { generateRecipesFromIngredients } from "../lib/gemini";
+import { useNavigate } from "react-router-dom";
 
 interface IngredientInputProps {
   onRecipesGenerated?: (recipes: any[]) => void;
@@ -21,6 +22,7 @@ const IngredientInput = ({
   onRecipesGenerated = () => {},
   isLoading = false,
 }: IngredientInputProps) => {
+  const navigate = useNavigate();
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [currentIngredient, setCurrentIngredient] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
@@ -61,7 +63,18 @@ const IngredientInput = ({
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto bg-white">
+    <Card className="w-full max-w-md mx-auto bg-white relative">
+      <Button
+        variant="ghost"
+        className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 flex items-center gap-1 px-2"
+        onClick={() => {
+          navigate("/");
+          window.location.reload();
+        }}
+      >
+        <Home className="h-5 w-5" />
+        <span>Home</span>
+      </Button>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Refrigerator className="h-5 w-5" />
