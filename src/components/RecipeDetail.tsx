@@ -9,6 +9,12 @@ interface RecipeDetailProps {
     difficulty: string;
     cookingTime: string;
     steps?: string[];
+    nutrition?: {
+      calories: string;
+      protein: string;
+      carbs: string;
+      fat: string;
+    };
   };
   isOpen?: boolean;
   onClose?: () => void;
@@ -154,6 +160,41 @@ export default function RecipeDetail({
             ))}
           </Accordion>
         </div>
+
+        {/* Nutritional Information */}
+        {recipe.nutrition && (
+          <>
+            <h2 className="text-xl font-semibold mt-6 mb-2 text-white">
+              Nutritional Information
+            </h2>
+            <div className="bg-gray-900 rounded-lg p-4 grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div className="bg-gray-800 p-3 rounded-md text-center">
+                <div className="text-sm text-gray-400">Calories</div>
+                <div className="text-lg font-bold text-orange-400">
+                  {recipe.nutrition.calories}
+                </div>
+              </div>
+              <div className="bg-gray-800 p-3 rounded-md text-center">
+                <div className="text-sm text-gray-400">Protein</div>
+                <div className="text-lg font-bold text-green-400">
+                  {recipe.nutrition.protein}
+                </div>
+              </div>
+              <div className="bg-gray-800 p-3 rounded-md text-center">
+                <div className="text-sm text-gray-400">Carbs</div>
+                <div className="text-lg font-bold text-blue-400">
+                  {recipe.nutrition.carbs}
+                </div>
+              </div>
+              <div className="bg-gray-800 p-3 rounded-md text-center">
+                <div className="text-sm text-gray-400">Fat</div>
+                <div className="text-lg font-bold text-purple-400">
+                  {recipe.nutrition.fat}
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

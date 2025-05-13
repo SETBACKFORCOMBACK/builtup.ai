@@ -8,22 +8,26 @@ import routes from "tempo-routes";
 
 function App() {
   return (
-    <AuthProvider>
-      <Suspense fallback={<p>Loading...</p>} className="right-1.5">
-        <>
-          <Routes>
-            <Route path="/login" element={<LoginPage />} />
-            <Route element={<ProtectedRoute />}>
-              <Route path="/" element={<Home />} />
-            </Route>
-            {import.meta.env.VITE_TEMPO === "true" && (
-              <Route path="/tempobook/*" />
-            )}
-          </Routes>
-          {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
-        </>
-      </Suspense>
-    </AuthProvider>
+    <div className="app-background">
+      <div className="glass-container min-h-screen p-4">
+        <AuthProvider>
+          <Suspense fallback={<p>Loading...</p>} className="right-1.5">
+            <>
+              <Routes>
+                <Route path="/login" element={<LoginPage />} />
+                <Route element={<ProtectedRoute />}>
+                  <Route path="/" element={<Home />} />
+                </Route>
+                {import.meta.env.VITE_TEMPO === "true" && (
+                  <Route path="/tempobook/*" />
+                )}
+              </Routes>
+              {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
+            </>
+          </Suspense>
+        </AuthProvider>
+      </div>
+    </div>
   );
 }
 

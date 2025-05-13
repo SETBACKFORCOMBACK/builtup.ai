@@ -86,7 +86,7 @@ const PhotoUploader = ({
         <DialogHeader>
           <DialogTitle>Choose from Gallery</DialogTitle>
         </DialogHeader>
-        <Card className="bg-white">
+        <Card className="glass-card">
           <CardContent>
             <div
               className={`relative h-[300px] w-full rounded-lg border-2 border-dashed p-4 transition-colors ${

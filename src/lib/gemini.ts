@@ -29,11 +29,17 @@ Provide the response in the following JSON format:
     "difficulty": "Easy/Medium/Hard",
     "cookingTime": "XX mins",
     "description": "Brief description",
-    "steps": ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5"]
+    "steps": ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5"],
+    "nutrition": {
+      "calories": "XXX kcal",
+      "protein": "XX g",
+      "carbs": "XX g",
+      "fat": "XX g"
+    }
   }
 ]
 Ensure the response is valid JSON.
-IMPORTANT: You MUST include at least 5 detailed step-by-step cooking instructions in the "steps" field for EACH recipe. This is critical for user experience.`,
+IMPORTANT: You MUST include at least 5 detailed step-by-step cooking instructions in the "steps" field for EACH recipe. Also, you MUST include nutritional information for EACH recipe. This is critical for user experience.`,
       imagePart,
     ]);
 
@@ -60,6 +66,12 @@ IMPORTANT: You MUST include at least 5 detailed step-by-step cooking instruction
           cookingTime: "20 mins",
           description: "A simple recipe using available ingredients",
           steps: ["Step 1", "Step 2", "Step 3"],
+          nutrition: {
+            calories: "350 kcal",
+            protein: "15 g",
+            carbs: "40 g",
+            fat: "12 g",
+          },
         },
       ];
     }
@@ -87,6 +99,7 @@ Suggest 4 recipes with:
 - Cooking time
 - Short description
 - **Step-by-step cooking instructions** (MANDATORY) in an array format.
+- **Nutritional information** (MANDATORY) including calories, proteins (g), carbohydrates (g), and fats (g) per serving.
 
 Return **ONLY JSON**, using this format:
 [
@@ -95,10 +108,16 @@ Return **ONLY JSON**, using this format:
     "difficulty": "Easy/Medium/Hard",
     "cookingTime": "XX mins",
     "description": "Brief description",
-    "steps": ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5"]
+    "steps": ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5"],
+    "nutrition": {
+      "calories": "XXX kcal",
+      "protein": "XX g",
+      "carbs": "XX g",
+      "fat": "XX g"
+    }
   }
 ]
-IMPORTANT: You MUST include at least 5 detailed step-by-step cooking instructions in the "steps" field for EACH recipe. This is critical for user experience. Never return a recipe without detailed steps.`,
+IMPORTANT: You MUST include at least 5 detailed step-by-step cooking instructions in the "steps" field for EACH recipe. Also, you MUST include nutritional information for EACH recipe. This is critical for user experience.`,
     );
 
     const response = await result.response;
@@ -124,6 +143,12 @@ IMPORTANT: You MUST include at least 5 detailed step-by-step cooking instruction
           cookingTime: "20 mins",
           description: "A simple recipe using available ingredients",
           steps: ["Step 1", "Step 2", "Step 3"],
+          nutrition: {
+            calories: "350 kcal",
+            protein: "15 g",
+            carbs: "40 g",
+            fat: "12 g",
+          },
         },
       ];
     }

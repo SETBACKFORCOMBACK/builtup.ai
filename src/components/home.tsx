@@ -66,6 +66,12 @@ const Home = ({ isLoading = false }: HomeProps) => {
             "Cook according to instructions",
             "Serve and enjoy",
           ],
+          nutrition: recipe.nutrition || {
+            calories: "350 kcal",
+            protein: "15 g",
+            carbs: "40 g",
+            fat: "12 g",
+          },
           image: `https://source.unsplash.com/featured/?${encodeURIComponent(recipe.title)},food`,
         }));
         setRecipes(formattedRecipes);
@@ -107,7 +113,7 @@ const Home = ({ isLoading = false }: HomeProps) => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div className="min-h-screen">
       <div className="max-w-5xl mx-auto px-4 py-8">
         {/* Compact Hero Section */}
         {!showIngredientInput && (

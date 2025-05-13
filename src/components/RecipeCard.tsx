@@ -11,7 +11,7 @@ interface Recipe {
 export function RecipeCard({ recipe }: { recipe?: Recipe }) {
   if (!recipe) {
     return (
-      <div className="border rounded-lg p-4 shadow-md bg-white">
+      <div className="border rounded-lg p-4 shadow-md glass-card">
         No recipe data available
       </div>
     );
