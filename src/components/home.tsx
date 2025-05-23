@@ -113,7 +113,7 @@ const Home = ({ isLoading = false }: HomeProps) => {
   );
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-lightorange">
       <div className="max-w-5xl mx-auto px-4 py-8">
         {/* Compact Hero Section */}
         {!showIngredientInput && (
@@ -156,11 +156,11 @@ const Home = ({ isLoading = false }: HomeProps) => {
                     Sign Out
                   </Button>
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
+                <h2 className="text-3xl md:text-4xl font-bold text-parallelblack tracking-tight">
                   <span className="text-primary">AI-Powered</span> Recipe
                   Generator
                 </h2>
-                <p className="text-base text-gray-600 max-w-md leading-relaxed">
+                <p className="text-base text-parallelblack max-w-md leading-relaxed">
                   Enter ingredients from your fridge and get instant recipe
                   suggestions
                 </p>
@@ -230,7 +230,7 @@ const Home = ({ isLoading = false }: HomeProps) => {
               ].map((feature, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-2 bg-primary/5 text-primary px-3 py-1.5 rounded-full text-sm"
+                  className="flex items-center gap-2 bg-primary/5 text-white px-3 py-1.5 rounded-full text-sm"
                 >
                   {feature.icon}
                   <span>{feature.text}</span>
@@ -266,7 +266,7 @@ const Home = ({ isLoading = false }: HomeProps) => {
               {selectedView === "main" ? (
                 <>
                   <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-xl font-semibold">
+                    <h2 className="text-xl font-semibold text-parallelblack">
                       Recipe Suggestions
                     </h2>
                     {favoriteRecipes.length > 0 && (
@@ -301,7 +301,9 @@ const Home = ({ isLoading = false }: HomeProps) => {
               ) : (
                 <>
                   <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-xl font-semibold">Favorite Recipes</h2>
+                    <h2 className="text-xl font-semibold text-parallelblack">
+                      Favorite Recipes
+                    </h2>
                     <Button
                       variant="outline"
                       onClick={() => setSelectedView("main")}
@@ -320,7 +322,7 @@ const Home = ({ isLoading = false }: HomeProps) => {
                     <div className="text-center p-8 bg-gray-50 rounded-lg border border-gray-100">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-12 w-12 mx-auto text-gray-400 mb-3"
+                        className="h-12 w-12 mx-auto text-white mb-3"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -332,13 +334,15 @@ const Home = ({ isLoading = false }: HomeProps) => {
                           d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                         />
                       </svg>
-                      <p className="text-gray-500">No favorite recipes yet</p>
-                      <p className="text-gray-400 text-sm mt-1">
+                      <p className="text-parallelblack">
+                        No favorite recipes yet
+                      </p>
+                      <p className="text-parallelblack text-sm mt-1">
                         Save recipes you like to find them here
                       </p>
                       <Button
                         onClick={() => setSelectedView("main")}
-                        className="mt-4"
+                        className="mt-4 text-white"
                         variant="outline"
                       >
                         Browse Recipes

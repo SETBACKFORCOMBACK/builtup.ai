@@ -143,8 +143,8 @@ const PhotoUploader = ({
                 </div>
               ) : (
                 <div className="flex h-full flex-col items-center justify-center gap-4">
-                  <ImageIcon className="h-12 w-12 text-gray-400" />
-                  <p className="text-center text-sm text-gray-500">
+                  <ImageIcon className="h-12 w-12 text-white" />
+                  <p className="text-center text-sm text-white">
                     Drag and drop your photo here, or click to select
                   </p>
                   <div className="flex gap-4">

@@ -48,17 +48,17 @@ export default function RecipeGrid({
         <motion.div
           key={index}
           variants={item}
-          className="border rounded-lg p-4 shadow-md bg-white hover:shadow-lg transition"
+          className="border rounded-lg p-4 shadow-md glass-card hover:shadow-lg transition"
           whileHover={{
             scale: 1.03,
             boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)",
           }}
         >
-          <h2 className="text-xl font-bold text-[#ff3b00]">{recipe.title}</h2>
-          <p className="text-sm text-gray-500 mb-2">{recipe.description}</p>
+          <h2 className="text-xl font-bold text-white">{recipe.title}</h2>
+          <p className="text-sm text-white mb-2">{recipe.description}</p>
           <div className="flex justify-between items-center">
-            <span className="text-green-600 text-sm">{recipe.difficulty}</span>
-            <span className="text-sm text-black">{recipe.cookingTime}</span>
+            <span className="text-white text-sm">{recipe.difficulty}</span>
+            <span className="text-sm text-white">{recipe.cookingTime}</span>
           </div>
 
           <div className="mt-4">

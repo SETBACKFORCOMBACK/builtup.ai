@@ -55,6 +55,13 @@ module.exports = {
           background: "rgba(30, 30, 50, 0.15)",
           border: "rgba(255, 255, 255, 0.2)",
         },
+        lightorange: {
+          DEFAULT: "#FFEAD7",
+          dark: "#FFD8B5",
+        },
+        parallelblack: {
+          DEFAULT: "#333333",
+        },
       },
       backdropBlur: {
         xs: "2px",

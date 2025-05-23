@@ -30,7 +30,7 @@ export default function RecipeDetail({
 }: RecipeDetailProps) {
   if (!recipe) {
     return (
-      <div className="p-6 bg-white rounded-lg shadow-lg">
+      <div className="p-6 bg-lightorange rounded-lg shadow-lg">
         No recipe details available
       </div>
     );
@@ -75,7 +75,7 @@ export default function RecipeDetail({
   };
 
   return (
-    <div className="p-6 bg-black text-white rounded-lg shadow-lg relative">
+    <div className="p-6 bg-lightorange text-white rounded-lg shadow-lg relative">
       {/* Back Button with Animation */}
       <div className="flex justify-between items-center absolute top-4 left-4 right-4">
         <Button
@@ -123,22 +123,26 @@ export default function RecipeDetail({
       <div className="mt-10">
         <div className="flex items-center mb-2">
           <ChefHat className="h-6 w-6 mr-2 text-[#ff3b00]" />
-          <h1 className="text-2xl font-bold text-white">{recipe.title}</h1>
+          <h1 className="text-2xl font-bold text-parallelblack">
+            {recipe.title}
+          </h1>
         </div>
-        <p className="text-gray-300">{recipe.description}</p>
+        <p className="text-parallelblack">{recipe.description}</p>
 
         <div className="flex justify-between items-center mt-4">
           <span className="bg-green-900 text-green-100 text-sm px-2 py-1 rounded">
             {recipe.difficulty}
           </span>
-          <span className="text-sm text-gray-300">{recipe.cookingTime}</span>
+          <span className="text-sm text-parallelblack">
+            {recipe.cookingTime}
+          </span>
         </div>
 
         {/* Cooking Steps */}
-        <h2 className="text-xl font-semibold mt-6 mb-2 text-white">
+        <h2 className="text-xl font-semibold mt-6 mb-2 text-parallelblack">
           Cooking Instructions
         </h2>
-        <div className="bg-gray-900 rounded-lg p-4">
+        <div className="bg-lightorange-dark rounded-lg p-4">
           <Accordion type="single" collapsible className="mt-2">
             {(
               recipe.steps || [
@@ -164,30 +168,30 @@ export default function RecipeDetail({
         {/* Nutritional Information */}
         {recipe.nutrition && (
           <>
-            <h2 className="text-xl font-semibold mt-6 mb-2 text-white">
+            <h2 className="text-xl font-semibold mt-6 mb-2 text-parallelblack">
               Nutritional Information
             </h2>
-            <div className="bg-gray-900 rounded-lg p-4 grid grid-cols-2 md:grid-cols-4 gap-3">
-              <div className="bg-gray-800 p-3 rounded-md text-center">
-                <div className="text-sm text-gray-400">Calories</div>
+            <div className="bg-lightorange-dark rounded-lg p-4 grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div className="bg-white p-3 rounded-md text-center">
+                <div className="text-sm text-parallelblack">Calories</div>
                 <div className="text-lg font-bold text-orange-400">
                   {recipe.nutrition.calories}
                 </div>
               </div>
-              <div className="bg-gray-800 p-3 rounded-md text-center">
-                <div className="text-sm text-gray-400">Protein</div>
+              <div className="bg-white p-3 rounded-md text-center">
+                <div className="text-sm text-parallelblack">Protein</div>
                 <div className="text-lg font-bold text-green-400">
                   {recipe.nutrition.protein}
                 </div>
               </div>
-              <div className="bg-gray-800 p-3 rounded-md text-center">
-                <div className="text-sm text-gray-400">Carbs</div>
+              <div className="bg-white p-3 rounded-md text-center">
+                <div className="text-sm text-parallelblack">Carbs</div>
                 <div className="text-lg font-bold text-blue-400">
                   {recipe.nutrition.carbs}
                 </div>
               </div>
-              <div className="bg-gray-800 p-3 rounded-md text-center">
-                <div className="text-sm text-gray-400">Fat</div>
+              <div className="bg-white p-3 rounded-md text-center">
+                <div className="text-sm text-parallelblack">Fat</div>
                 <div className="text-lg font-bold text-purple-400">
                   {recipe.nutrition.fat}
                 </div>
